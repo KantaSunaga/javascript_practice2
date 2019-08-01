@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>TODOリスト</title>
+  </head>
+ <body>
+   <h1>TODOリスト</h1>
+    <input type="radio" name="displayStatus" id="all" value="true"> 全て
+    <input type="radio" name="displayStatus" id="doing" value="true"> 作業中
+    <input type="radio" name="displayStatus" id="done" value="true"> 完了
+
+    <div id="todoTableArea">
+      <table>
+        <tr>
+          <td style="border-style: none;">
+            ID
+          </td>
+          <td style="border-style: none;">
+            コメント
+          </td>
+          <td style="border-style: none;">
+            状態
+          </td>
+        </tr>
+        <tr id="todoTrArea">
+        </tr>
+      </table>
+    </div>
+
+    <h2>新規タスクの追加</h2>
+    <input type="text" id="toDoInputArea">
+    <input type="submit" value="追加">
+ </body>
+</html>
