@@ -30,6 +30,71 @@
 
     <h2>新規タスクの追加</h2>
     <input type="text" id="toDoInputArea">
-    <input type="submit" value="追加">
+    <input type="submit" value="追加" id="addToDoButton">
+    <script type="module">
+      class Todo {
+        constructor(id, text) {      
+          this.id = id;
+          this.text = text;
+          this.type = "作業中";
+        }
+      }
+
+      const toDos = [];
+
+      const button = document.getElementById("addToDoButton")
+      button.addEventListener("click", createTodoTable, false);
+
+      function addTodo () {
+        const id = toDos.length;
+        const target = document.getElementById("toDoInputArea")
+        const text = target.value;
+        toDos.push (new Todo(id, text));
+      };
+
+      function displayTodos() {
+        toDos.forEach(function( todo ) {
+          const tr = document.createElement('tr');
+          const nameTd = document.createElement('td');
+          nameTd.textContent = todo.text;
+          const idTd = document.createElement('td');
+          idTd.textContent = todo.id;
+          const typeTd = document.createElement('td');
+          typeTd.textContent = todo.type;
+
+          const buttonTd = document.createElement('td');
+          const changeButton = document.createElement('button');
+          changeButton.classList.add("change-button")
+          changeButton.dataset.todoId = todo.id;
+          changeButton.textContent = todo.type;
+          const deleteButton = document.createElement('button');
+          deleteButton.classList.add("delete-button")
+          deleteButton.dataset.todoId = todo.id;
+          deleteButton.textContent = "削除";
+          buttonTd.appendChild(changeButton);
+          buttonTd.appendChild(deleteButton)
+
+          tr.appendChild(idTd);
+          tr.appendChild(nameTd);
+          tr.appendChild(typeTd);
+          tr.appendChild(buttonTd);
+          const target = document.getElementById('todoTrArea');
+          target.appendChild(tr);
+        });
+      }
+
+      function createTodoTable(){
+        addTodo ()
+        const target = document.getElementById("toDoInputArea")
+        target.value = "";
+        hideTodos()
+        displayTodos()
+      };
+
+      function hideTodos() {
+        const target = document.getElementById('todoTrArea');
+        target.textContent = "";
+      }
+    </script>
  </body>
 </html>
