@@ -26,24 +26,36 @@ function displayControl(){
   switch (this.value){
     case "doing":
       const dones = document.querySelectorAll("tr.done");
-      dones.forEach(function( task ){
-        task.classList.add("hide");
-      });
+      showHideTasks ( dones, "hide" );
       break;
     case "done":
       const doings = document.querySelectorAll("tr.doing"); 
-      doings.forEach(function( task ){
-        task.classList.add("hide");
-      });
+      showHideTasks ( doings, "hide" );
       break ;
     case "all":
       const unDones = document.querySelectorAll("tr.done, tr.doing");
-      unDones.forEach(function( task ){
-        task.classList.delete("hide");
-      });
+      showHideTasks ( unDones, "show" );
       break;
   }
 };
+
+function showHideTasks ( tasks, type ) {
+  switch (type){
+    case "hide":
+      tasks.forEach(function( task ){
+        task.classList.add("hide");
+      });
+      break;
+    case "show":
+      tasks.forEach(function( task ){
+        task.classList.delete("hide")
+      });
+      break ;
+  }
+};
+
+
+
 
 function addTodo () {
   const id = toDos.length;
