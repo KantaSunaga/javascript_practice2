@@ -8,7 +8,7 @@ class Todo {
 
 const toDos = [];
 
-const addButton = document.getElementById("addToDoButton")
+const addButton = document.getElementById("addToDoButton");
 addButton.addEventListener("click", createTodoTable, false);
 
 const ids = ["displayAll", "displayDoing", "displayDone"];
@@ -52,7 +52,6 @@ function addTodo () {
   toDos.push (new Todo(id, text));
 };
 
-// きったねぇ・・・
 function displayTodos() {
   toDos.forEach(function( todo ) {
     const tr = document.createElement('tr');
@@ -66,7 +65,7 @@ function displayTodos() {
 
     const buttonTd = document.createElement('td');
     const changeButton = document.createElement('button');
-    changeButton.classList.add("change-button")
+    changeButton.classList.add("change-button");
     changeButton.dataset.todoId = todo.id;
     changeButton.textContent = todo.type;
     changeButton.addEventListener("click", changeStatus, false);
@@ -90,11 +89,11 @@ function displayTodos() {
 }
 
 function createTodoTable(){
-  addTodo ()
-  const target = document.getElementById("toDoInputArea")
+  addTodo ();
+  const target = document.getElementById("toDoInputArea");
   target.value = "";
-  hideTodos()
-  displayTodos()
+  hideTodos();
+  displayTodos();
 };
 
 function hideTodos() {
@@ -106,14 +105,14 @@ function changeStatus () {
   const id = this.dataset.todoId;
   const todo = toDos[id];
   todo.type = 'done';
-  hideTodos()
-  displayTodos()
+  hideTodos();
+  displayTodos();
 };
 
 function deleteTodo (){
   const id = this.dataset.todoId;
-  toDos[id].type = "deleted"
-  hideTodos()
-  displayTodos()
+  toDos[id].type = "deleted";
+  hideTodos();
+  displayTodos();
 }
 
