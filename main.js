@@ -2,9 +2,16 @@ class Todo {
   constructor(id, text) {      
     this.id = id;
     this.text = text;
-    this.type = "doing";
-  }
-}
+    this._type = "doing";
+  };
+  get type(){
+    return this._type;
+  };
+  set type(value){
+    this._type = value;
+  };
+
+};
 
 const toDos = [];
 
@@ -36,7 +43,7 @@ function displayControl(){
       const unDones = document.querySelectorAll("tr.done, tr.doing");
       showHideTasks ( unDones, "show" );
       break;
-  }
+  };
 };
 
 function showHideTasks ( tasks, type ) {
@@ -48,18 +55,16 @@ function showHideTasks ( tasks, type ) {
       break;
     case "show":
       tasks.forEach(function( task ){
-        task.classList.delete("hide")
+        task.classList.delete("hide");
       });
-      break ;
-  }
+      break;
+  };
 };
-
-
 
 
 function addTodo () {
   const id = toDos.length;
-  const target = document.getElementById("toDoInputArea")
+  const target = document.getElementById("toDoInputArea");
   const text = target.value;
   toDos.push (new Todo(id, text));
 };
@@ -76,17 +81,8 @@ function displayTodos() {
     typeTd.textContent = todo.type;
 
     const buttonTd = document.createElement('td');
-    const changeButton = document.createElement('button');
-    changeButton.classList.add("change-button");
-    changeButton.dataset.todoId = todo.id;
-    changeButton.textContent = todo.type;
-    changeButton.addEventListener("click", changeStatus, false);
-
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add("delete-button")
-    deleteButton.dataset.todoId = todo.id;
-    deleteButton.textContent = "削除";
-    deleteButton.addEventListener("click", deleteTodo, false);
+    const changeButton = createChangeButton(todo);
+    const deleteButton = createDeleteButton(todo);
 
     buttonTd.appendChild(changeButton);
     buttonTd.appendChild(deleteButton);
@@ -98,7 +94,27 @@ function displayTodos() {
     const target = document.getElementById('todoTrArea');
     target.appendChild(tr);
   });
-}
+};
+
+function createChangeButton(todo) {
+  const changeButton = document.createElement('button');
+  changeButton.classList.add("change-button");
+  changeButton.dataset.todoId = todo.id;
+  const buttonText = {"doing": "作業中",　"done": "完了"};
+  changeButton.textContent = buttonText[todo.type];
+  changeButton.addEventListener("click", changeStatus, false);
+  return changeButton;
+};
+
+function createDeleteButton(todo) {
+  const deleteButton = document.createElement('button');
+  deleteButton.classList.add("delete-button");
+  deleteButton.dataset.todoId = todo.id;
+  deleteButton.textContent = "削除";
+  deleteButton.addEventListener("click", deleteTodo, false);
+  return deleteButton;
+};
+
 
 function createTodoTable(){
   addTodo ();
@@ -111,12 +127,12 @@ function createTodoTable(){
 function hideTodos() {
   const target = document.getElementById('todoTrArea');
   target.textContent = "";
-}
+};
 
 function changeStatus () {
   const id = this.dataset.todoId;
   const todo = toDos[id];
-  todo.type = 'done';
+  todo.type ='done';
   hideTodos();
   displayTodos();
 };
@@ -126,5 +142,5 @@ function deleteTodo (){
   toDos[id].type = "deleted";
   hideTodos();
   displayTodos();
-}
+};
 
