@@ -132,7 +132,8 @@ function hideTodos() {
 function changeStatus () {
   const id = this.dataset.todoId;
   const todo = toDos[id];
-  todo.type ='done';
+  const type = todo.type === "doing" ? 'done' :'doing'
+  todo.type = type;
   hideTodos();
   displayTodos();
 };
