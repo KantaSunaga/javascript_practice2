@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>TODOリスト</title>
+  </head>
+ <body>
+   <h1>TODOリスト</h1>
+    <input type="radio" name="displayButton" id="displayAll" value="all"> 全て
+    <input type="radio" name="displayButton" id="displayDoing" value="doing"> 作業中
+    <input type="radio" name="displayButton" id="displayDone" value="done"> 完了
+
+    <div id="todoTableArea">
+      <table>
+        <thead>
+          <tr>
+            <td style="border-style: none;">
+              ID
+            </td>
+            <td style="border-style: none;">
+              コメント
+            </td>
+            <td style="border-style: none;">
+              状態
+            </td>
+          </tr>
+        </thead>
+        <tbody id="todoTrArea">
+        </tbody>
+      </table>
+    </div>
+
+    <h2>新規タスクの追加</h2>
+    <input type="text" id="toDoInputArea">
+    <input type="submit" value="追加" id="addToDoButton">
+    <script type="text/javascript" src="main.js">
+    </script>
+    <style>
+      .deleted, .hide{
+        display: none;
+      }
+
+    </style>
+ </body>
+</html>
